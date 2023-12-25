@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="app.css">
-    </head>
-    <body>
-        <div id="components" class="block w-full">
-            <div class="p-8 flex flex-col overflow-x-hidden justify-start items-start">
-                <!--insert components here-->
-            </div>
-        </div>
+  <head>
+    <link rel="stylesheet" href="app.css" />
+    <!-- Development -->
+  </head>
+  <body>
+    <div id="components" class="block w-full">
+      <div
+        class="p-8 flex flex-col overflow-x-hidden justify-start items-start"
+      >
+        <!--insert components here-->
+        <!--<Child/>-->
+        <Dropdown/>
+      </div>
+    </div>
 
-        <script src="components.js"></script>
-        <script>
-            new components({
-                el: "#components"
-            })
-        </script>
-    </body>
+    <script src="components.js"></script>
+    <script>
+      new components({
+        el: "#components",
+      });
+      
+    </script>
+  </body>
 </html>

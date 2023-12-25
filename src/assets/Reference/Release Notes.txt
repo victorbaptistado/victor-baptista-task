@@ -1,0 +1,16 @@
+Cera Pro v1.0
+December 07 2016
+
+files included:
+Cera PRO Thin v1.0
+Cera PRO Thin Italic v1.0
+Cera PRO Light v1.0
+Cera PRO Light Italic v1.0
+Cera PRO Regular v1.0
+Cera PRO Italic v1.0
+Cera PRO Medium v1.0
+Cera PRO Medium Italic v1.0
+Cera PRO Bold v1.0
+Cera PRO Bold Italic v1.0
+Cera PRO Black v1.0
+Cera PRO Black Italic v1.0

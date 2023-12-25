@@ -1,4 +1,5 @@
 //needs laravel-mix and tailwind at the start to work properly
+//needs laravel-mix and tailwind at the start to work properly
 const mix = require('laravel-mix');
 const tailwindcss = require('tailwindcss');
 
@@ -26,3 +27,4 @@ mix.vue({
             }
         });
         //global settings including base directory, index for generated site, and tailwind postcss
+       
