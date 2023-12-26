@@ -1,12 +1,8 @@
 <template>
-  <!--<div
-    class="flex items-center justify-center bg-gray-100 
-    min-h-screen"
-  >-->
-  <div class="min-h-screen items-center relative align-middle text-lg w-60">
+  <div>
     <button
       class="flex items-center justify-between px-3 py-2 bg-grey-100 w-36 text-white rounded-sm"
-      @click="isOptionsExpanded = !isOptionsExpanded"
+      @click="setExpanded(isOptionsExpanded)"
       @blur="isOptionsExpanded = false"
     >
       <svgicon icon="filler" color="white" width="24" height="auto"></svgicon>
@@ -14,7 +10,6 @@
       <svgicon icon="icon-arrow" color="white" width="20" height="auto" class="h-4 w-4 transform transition-transform duration-200 ease-in-out"
         :class="isOptionsExpanded ? 'rotate-180' : 'rotate-0'"></svgicon>
     </button>
-    <Ldrop :expanded="isOptionsExpanded" @selected-option="handleDataLdrop"  />
   </div>
   
 </template>
@@ -27,22 +22,32 @@ Vue.use(VueSVGIcon)
 //Import svg Icon
 import "../icons/index"
 
-import Ldrop from "./Ldrop.vue"
-
 export default {
   data() {
     return {
-      isOptionsExpanded: false,
-      selectedOption: "Button",
+      isOptionsExpanded: Boolean,
     };
   },
-  
+  props: {
+    selectedOption: {
+      type: String,
+      required: true,
+    },     
+  },
   methods: {
-    handleDataLdrop(option) {
-      //Receives selected option from child Ldrop
-      this.selectedOption = option;
+    setExpanded(isOptionsExpanded) {
+      this.isOptionsExpanded = !this.isOptionsExpanded;
+      this.$emit('options-expanded', isOptionsExpanded);
     },
   },
+  /*
+  watch: {
+    expandedValue(isOptionsExpanded) {
+      console.log('isOptionsExpanded Bdrop', isOptionsExpanded);
+      this.isOptionsExpanded = isOptionsExpanded;
+    }
+  }
+  */
 };
 
 </script>

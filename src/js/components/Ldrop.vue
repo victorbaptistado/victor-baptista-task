@@ -1,70 +1,123 @@
 <template>
   <div>
-    <transition
-      enter-active-class="transform transition duration-500 ease-custom"
-      enter-class="-translate-y-1/2 scale-y-0 opacity-0"
-      enter-to-class="translate-y-0 scale-y-100 opacity-100"
-      leave-active-class="transform transition duration-300 ease-custom"
-      leave-class="translate-y-0 scale-y-100 opacity-100"
-      leave-to-class="-translate-y-1/2 scale-y-0 opacity-0"
+    <div class="hidden MD:block">
+      <transition
+        enter-active-class="transform transition duration-500 ease-custom"
+        enter-class="-translate-y-1/2 scale-y-0 opacity-0"
+        enter-to-class="translate-y-0 scale-y-100 opacity-100"
+        leave-active-class="transform transition duration-300 ease-custom"
+        leave-class="translate-y-0 scale-y-100 opacity-100"
+        leave-to-class="-translate-y-1/2 scale-y-0 opacity-0"
+      >
+        <ul
+          v-show="isOptionsExpanded"
+          class="absolute left-0 right-0 mb-4 bg-white rounded-lg shadow-lg overflow-hidden"
+        >
+          <li
+            v-for="(option, index) in optionsArray"
+            :key="index"
+            class="px-3 py-2 transition-colors duration-300 hover:bg-gray-200"
+            @mousedown.prevent="setOption(option)"
+          >
+            <div class="flex items-center align-middle space-x-2 text-wrap">
+              <div>
+                <svgicon icon="filler" width="24" height="auto"></svgicon>
+              </div>
+              <div>
+                <p class="text-wrap w-48">{{ option }}</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </transition>
+    </div>
+      
+
+    <aside
+      class="transform MD:hidden bottom-0 fixed h-full overflow-auto ease-in-out transition-all duration-300 z-30"
+      :class="isOptionsExpanded ? 'translate-y-0' : '-translate-y-full'"
     >
       <ul
-        v-show="expanded"
-        class="absolute left-0 right-0 mb-4 bg-white rounded-lg shadow-lg overflow-hidden"
+        class="left-0 right-0 mb-4 bg-grey-100 overflow-hidden"
       >
         <li
-          v-for="(option, index) in options"
+          v-for="(option, index) in optionsArray"
           :key="index"
-          class="px-3 py-2 transition-colors duration-300 hover:bg-gray-200"
+          class="px-3 p-4 py-2 transition-colors duration-300"
           @mousedown.prevent="setOption(option)"
+          @click="isOptionsExpanded = false"
         >
-          <div class="flex items-center align-middle space-x-2 text-wrap">
-            <div>
-              <svgicon icon="filler" width="24" height="auto"></svgicon>
+          <span
+          @click="isOptionsExpanded = false"
+          class="flex w-full items-center"
+          >
+            <div class="flex items-center align-middle space-x-2 text-wrap">
+              <div>
+                <svgicon icon="filler" width="24" height="auto"></svgicon>
+              </div>
+              <div>
+                <p class="text-wrap w-48">{{ option }}</p>
+              </div>
             </div>
-            <div>
-              <p class="text-wrap w-48">{{ option }}</p>
-            </div>
-          </div>
-        </li>
+          </span>
+        </li>      
       </ul>
-    </transition>
+    </aside>
   </div>
 </template>
 
 <script>
-//Import svgicon tag
+//Import svgicon tag and icon
 import VueSVGIcon from 'vue-svgicon'
 Vue.use(VueSVGIcon)
-
-//Import svg Icon
 import "../icons/index"
 
 export default {
   data() {
     return {
-      //isOptionsExpanded: false,
-      //selectedOption: "Button",
-      options: ["1x", "2x", "3x", "4x or more"]
+      //isOpen: false,
     };
   },
   props: {
-    expanded: Boolean,
+    isOptionsExpanded: {
+      type: Boolean,
+      required: true,
+    }, 
+    optionsArray: {
+      type: Array,
+      required: true,
+    }    
   },
   methods: {
     //Handles the option selection
     setOption(option) {
-
       //Sends selected option to parent Bdrop 
       this.$emit('selected-option', option);
-      //this.expanded = false;
     },
+    drawer() {
+      this.isOptionsExpanded = !this.isOptionsExpanded;
+    }
   },
+  watch: {
+    isOptionsExpanded: {
+      immediate: true,
+      handler(isOptionsExpanded) {
+        if (process.client) {
+          if (isOptionsExpanded) document.body.style.setProperty("overflow", "hidden");
+          else document.body.style.removeProperty("overflow");
+        }
+      }
+    }
+  },
+  mounted() {
+    document.addEventListener("keydown", e => {
+      if (e.keyCode == 27 && this.isOptionsExpanded) this.isOptionsExpanded = false;
+    });
+  }
+
 };
 </script>
 
 <style>
-.ease-custom {
-  transition-timing-function: cubic-bezier(.61,-0.53,.43,1.43);
-}
+
 </style>
