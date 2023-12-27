@@ -114,7 +114,8 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      isOptionsExpanded: false
+      isOptionsExpanded: false,
+      newName: this.dropdownName
     };
   },
   props: {
@@ -128,12 +129,6 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
       required: true
     }
   },
-  watch: {
-    naming: function naming(dropwdownName) {
-      console.log('dropwdownName', dropwdownName);
-      this.selectedOption = dropwdownName;
-    }
-  },
   methods: {
     handleDataBdrop: function handleDataBdrop(isOptionsExpanded) {
       //Receives Expanding Boolean from child Bdrop
@@ -141,7 +136,7 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
     },
     handleDataLdrop: function handleDataLdrop(selectedOption) {
       //Receives selected option from child Ldrop
-      this.dropdownName = selectedOption;
+      this.newName = selectedOption;
       this.isOptionsExpanded = false;
       isOptionsExpanded = this.isOptionsExpanded;
     }
@@ -377,7 +372,7 @@ var render = function render() {
     staticClass: "min-h-screen items-center relative align-middle text-lg w-60"
   }, [_c("Bdrop", {
     attrs: {
-      "selected-option": _vm.dropdownName,
+      "selected-option": _vm.newName,
       "is-options-expanded": _vm.isOptionsExpanded
     },
     on: {

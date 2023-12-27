@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen items-center relative align-middle text-lg w-60">
-    <Bdrop :selected-option="dropdownName" :is-options-expanded="isOptionsExpanded" @options-expanded="handleDataBdrop"/>
+    <Bdrop :selected-option="newName" :is-options-expanded="isOptionsExpanded" @options-expanded="handleDataBdrop"/>
     <Ldrop :options-array="optionsArray" :is-options-expanded="isOptionsExpanded" @selected-option="handleDataLdrop"  />
   </div>
   
@@ -16,6 +16,7 @@ export default {
   data() {
     return {
       isOptionsExpanded: false,
+      newName: this.dropdownName
     };
   },
   props: {
@@ -28,12 +29,7 @@ export default {
       required: true,
     },     
   },
-  watch: {
-    naming(dropwdownName){
-      console.log('dropwdownName',dropwdownName)
-      this.selectedOption = dropwdownName;
-    }
-  },
+  
   methods: {
     handleDataBdrop(isOptionsExpanded) {
       //Receives Expanding Boolean from child Bdrop
@@ -41,11 +37,10 @@ export default {
     },
     handleDataLdrop(selectedOption) {
       //Receives selected option from child Ldrop
-      this.dropdownName = selectedOption;
+      this.newName = selectedOption;
       this.isOptionsExpanded = false;
       isOptionsExpanded = this.isOptionsExpanded;
     },
-    
   },
 };
 
