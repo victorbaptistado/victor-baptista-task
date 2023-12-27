@@ -76,13 +76,17 @@ export default {
   data() {
     return {
       //isOpen: false,
+      //expanded: this.isOptionsExpanded,
     };
   },
   props: {
+    updatedOptions: {
+      type: Boolean
+    },
     isOptionsExpanded: {
       type: Boolean,
       required: true,
-    }, 
+    },
     optionsArray: {
       type: Array,
       required: true,
@@ -92,7 +96,7 @@ export default {
     //Handles the option selection
     setOption(option) {
       //Sends selected option to parent Bdrop 
-      this.$emit('selected-option', option);
+      this.$emit('selected-option', {selectedOption: option, isOptionsExpanded: this.isOptionsExpanded });
     },
     drawer() {
       this.isOptionsExpanded = !this.isOptionsExpanded;
@@ -109,12 +113,6 @@ export default {
       }
     }
   },
-  mounted() {
-    document.addEventListener("keydown", e => {
-      if (e.keyCode == 27 && this.isOptionsExpanded) this.isOptionsExpanded = false;
-    });
-  }
-
 };
 </script>
 

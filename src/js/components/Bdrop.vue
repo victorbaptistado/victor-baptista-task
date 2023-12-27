@@ -25,7 +25,7 @@ import "../icons/index"
 export default {
   data() {
     return {
-      isOptionsExpanded: Boolean,
+      isOptionsExpanded: false,
     };
   },
   props: {
@@ -36,8 +36,11 @@ export default {
   },
   methods: {
     setExpanded(isOptionsExpanded) {
+      console.log('isOptionsExpandeed', this.isOptionsExpanded);
       this.isOptionsExpanded = !this.isOptionsExpanded;
-      this.$emit('options-expanded', isOptionsExpanded);
+      console.log('POST isOptionsExpandeed', this.isOptionsExpanded);
+      this.$emit('options-expanded', this.isOptionsExpanded);
+      
     },
   },
   /*

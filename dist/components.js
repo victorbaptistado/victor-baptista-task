@@ -25,7 +25,7 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      isOptionsExpanded: Boolean
+      isOptionsExpanded: false
     };
   },
   props: {
@@ -36,8 +36,10 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
   },
   methods: {
     setExpanded: function setExpanded(isOptionsExpanded) {
+      console.log('isOptionsExpandeed', this.isOptionsExpanded);
       this.isOptionsExpanded = !this.isOptionsExpanded;
-      this.$emit('options-expanded', isOptionsExpanded);
+      console.log('POST isOptionsExpandeed', this.isOptionsExpanded);
+      this.$emit('options-expanded', this.isOptionsExpanded);
     }
   }
   /*
@@ -114,11 +116,15 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      isOptionsExpanded: false,
-      newName: this.dropdownName
+      newName: this.dropdownName,
+      updatedOptions: this.isOptionsExpanded
     };
   },
   props: {
+    isOptionsExpanded: {
+      type: Boolean,
+      "default": false
+    },
     dropdownName: {
       type: String,
       "default": "Button" // Default value if not provided
@@ -132,13 +138,15 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
   methods: {
     handleDataBdrop: function handleDataBdrop(isOptionsExpanded) {
       //Receives Expanding Boolean from child Bdrop
-      this.isOptionsExpanded = isOptionsExpanded;
+      this.updatedOptions = isOptionsExpanded;
     },
-    handleDataLdrop: function handleDataLdrop(selectedOption) {
+    handleDataLdrop: function handleDataLdrop(data) {
       //Receives selected option from child Ldrop
-      this.newName = selectedOption;
-      this.isOptionsExpanded = false;
-      isOptionsExpanded = this.isOptionsExpanded;
+      console.log('isOptionsExpanded Dropdown', data.isOptionsExpanded);
+      console.log('selectedOption', data.selectedOption);
+      this.newName = data.selectedOption;
+      this.updatedOptions = false;
+      //updatedOptions = this.updatedOptions;
     }
   }
 });
@@ -169,9 +177,13 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
   data: function data() {
     return {
       //isOpen: false,
+      //expanded: this.isOptionsExpanded,
     };
   },
   props: {
+    updatedOptions: {
+      type: Boolean
+    },
     isOptionsExpanded: {
       type: Boolean,
       required: true
@@ -185,7 +197,10 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
     //Handles the option selection
     setOption: function setOption(option) {
       //Sends selected option to parent Bdrop 
-      this.$emit('selected-option', option);
+      this.$emit('selected-option', {
+        selectedOption: option,
+        isOptionsExpanded: this.isOptionsExpanded
+      });
     },
     drawer: function drawer() {
       this.isOptionsExpanded = !this.isOptionsExpanded;
@@ -200,12 +215,6 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
         }
       }
     }
-  },
-  mounted: function mounted() {
-    var _this = this;
-    document.addEventListener("keydown", function (e) {
-      if (e.keyCode == 27 && _this.isOptionsExpanded) _this.isOptionsExpanded = false;
-    });
   }
 });
 
@@ -373,7 +382,7 @@ var render = function render() {
   }, [_c("Bdrop", {
     attrs: {
       "selected-option": _vm.newName,
-      "is-options-expanded": _vm.isOptionsExpanded
+      "is-options-expanded": _vm.updatedOptions
     },
     on: {
       "options-expanded": _vm.handleDataBdrop
@@ -381,7 +390,7 @@ var render = function render() {
   }), _vm._v(" "), _c("Ldrop", {
     attrs: {
       "options-array": _vm.optionsArray,
-      "is-options-expanded": _vm.isOptionsExpanded
+      "is-options-expanded": _vm.updatedOptions
     },
     on: {
       "selected-option": _vm.handleDataLdrop

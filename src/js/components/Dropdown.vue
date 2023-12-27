@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen items-center relative align-middle text-lg w-60">
-    <Bdrop :selected-option="newName" :is-options-expanded="isOptionsExpanded" @options-expanded="handleDataBdrop"/>
-    <Ldrop :options-array="optionsArray" :is-options-expanded="isOptionsExpanded" @selected-option="handleDataLdrop"  />
+    <Bdrop :selected-option="newName" :is-options-expanded="updatedOptions" @options-expanded="handleDataBdrop"/>
+    <Ldrop :options-array="optionsArray" :is-options-expanded="updatedOptions" @selected-option="handleDataLdrop"  />
   </div>
   
 </template>
@@ -15,11 +15,15 @@ import "../icons/index"
 export default {
   data() {
     return {
-      isOptionsExpanded: false,
-      newName: this.dropdownName
+      newName: this.dropdownName,
+      updatedOptions: this.isOptionsExpanded
     };
   },
-  props: {
+  props: { 
+    isOptionsExpanded: {
+      type: Boolean,
+      default: false
+    },
     dropdownName: {
       type: String,
       default: "Button", // Default value if not provided
@@ -33,13 +37,16 @@ export default {
   methods: {
     handleDataBdrop(isOptionsExpanded) {
       //Receives Expanding Boolean from child Bdrop
-      this.isOptionsExpanded = isOptionsExpanded;
+      this.updatedOptions = isOptionsExpanded;
     },
-    handleDataLdrop(selectedOption) {
+    handleDataLdrop(data) {
       //Receives selected option from child Ldrop
-      this.newName = selectedOption;
-      this.isOptionsExpanded = false;
-      isOptionsExpanded = this.isOptionsExpanded;
+      console.log('isOptionsExpanded Dropdown', data.isOptionsExpanded);
+      console.log('selectedOption', data.selectedOption)
+      
+      this.newName = data.selectedOption;
+      this.updatedOptions = false;
+      //updatedOptions = this.updatedOptions;
     },
   },
 };
