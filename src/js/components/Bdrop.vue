@@ -46,13 +46,13 @@ export default {
       this.$emit('options-expanded', this.expand);
     },
   },
-  
+  /*
   computed: {
     isOptionsExpandedUpdate(){
       return this.isOptionsExpanded;
     },
   }
-  
+  */
 };
 
 </script>

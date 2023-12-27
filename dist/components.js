@@ -45,12 +45,14 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
       this.expand = !this.isOptionsExpanded;
       this.$emit('options-expanded', this.expand);
     }
-  },
-  computed: {
-    isOptionsExpandedUpdate: function isOptionsExpandedUpdate() {
-      return this.isOptionsExpanded;
-    }
   }
+  /*
+  computed: {
+    isOptionsExpandedUpdate(){
+      return this.isOptionsExpanded;
+    },
+  }
+  */
 });
 
 /***/ }),
@@ -458,10 +460,10 @@ var render = function render() {
       staticClass: "text-wrap w-48"
     }, [_vm._v(_vm._s(option))])])])]);
   }), 0)])], 1), _vm._v(" "), _c("aside", {
-    staticClass: "transform MD:hidden bottom-0 fixed h-full overflow-auto ease-in-out transition-all duration-300 z-30",
-    "class": _vm.isOptionsExpanded ? "translate-y-0" : "-translate-y-full"
+    staticClass: "transform MD:hidden bg-grey-100 left-0 right-0 bottom-0 w-full fixed overflow-auto ease-in-out transition-all duration-300 z-30",
+    "class": _vm.isOptionsExpanded ? "translate-y-0" : "translate-y-full"
   }, [_c("ul", {
-    staticClass: "left-0 right-0 mb-4 bg-grey-100 overflow-hidden"
+    staticClass: "left-0 right-0 mb-4 overflow-hidden"
   }, _vm._l(_vm.optionsArray, function (option, index) {
     return _c("li", {
       key: index,

@@ -34,11 +34,11 @@
       
 
     <aside
-      class="transform MD:hidden bottom-0 fixed h-full overflow-auto ease-in-out transition-all duration-300 z-30"
-      :class="isOptionsExpanded ? 'translate-y-0' : '-translate-y-full'"
+      class="transform MD:hidden bg-grey-100 left-0 right-0 bottom-0 w-full fixed overflow-auto ease-in-out transition-all duration-300 z-30"
+      :class="isOptionsExpanded ? 'translate-y-0' : 'translate-y-full'"
     >
       <ul
-        class="left-0 right-0 mb-4 bg-grey-100 overflow-hidden"
+        class="left-0 right-0 mb-4 overflow-hidden"
       >
         <li
           v-for="(option, index) in optionsArray"
