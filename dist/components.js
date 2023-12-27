@@ -25,31 +25,32 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      isOptionsExpanded: false
+      expand: false
     };
   },
   props: {
     selectedOption: {
       type: String,
       required: true
+    },
+    isOptionsExpanded: {
+      "default": false,
+      type: Boolean,
+      required: true
     }
   },
   methods: {
-    setExpanded: function setExpanded(isOptionsExpanded) {
-      console.log('isOptionsExpandeed', this.isOptionsExpanded);
-      this.isOptionsExpanded = !this.isOptionsExpanded;
-      console.log('POST isOptionsExpandeed', this.isOptionsExpanded);
-      this.$emit('options-expanded', this.isOptionsExpanded);
+    setExpanded: function setExpanded() {
+      //Makes expand equals the coming props isOptionsExpanded 
+      this.expand = !this.isOptionsExpanded;
+      this.$emit('options-expanded', this.expand);
+    }
+  },
+  computed: {
+    isOptionsExpandedUpdate: function isOptionsExpandedUpdate() {
+      return this.isOptionsExpanded;
     }
   }
-  /*
-  watch: {
-    expandedValue(isOptionsExpanded) {
-      console.log('isOptionsExpanded Bdrop', isOptionsExpanded);
-      this.isOptionsExpanded = isOptionsExpanded;
-    }
-  }
-  */
 });
 
 /***/ }),
@@ -142,8 +143,6 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
     },
     handleDataLdrop: function handleDataLdrop(data) {
       //Receives selected option from child Ldrop
-      console.log('isOptionsExpanded Dropdown', data.isOptionsExpanded);
-      console.log('selectedOption', data.selectedOption);
       this.newName = data.selectedOption;
       this.updatedOptions = false;
       //updatedOptions = this.updatedOptions;
@@ -239,7 +238,7 @@ var render = function render() {
     staticClass: "flex items-center justify-between px-3 py-2 bg-grey-100 w-36 text-white rounded-sm",
     on: {
       click: function click($event) {
-        return _vm.setExpanded(_vm.isOptionsExpanded);
+        return _vm.setExpanded();
       },
       blur: function blur($event) {
         _vm.isOptionsExpanded = false;

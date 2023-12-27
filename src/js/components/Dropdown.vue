@@ -31,7 +31,7 @@ export default {
     optionsArray: {
       type: Array,
       required: true,
-    },     
+    },
   },
   
   methods: {
@@ -41,9 +41,6 @@ export default {
     },
     handleDataLdrop(data) {
       //Receives selected option from child Ldrop
-      console.log('isOptionsExpanded Dropdown', data.isOptionsExpanded);
-      console.log('selectedOption', data.selectedOption)
-      
       this.newName = data.selectedOption;
       this.updatedOptions = false;
       //updatedOptions = this.updatedOptions;

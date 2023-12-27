@@ -2,7 +2,7 @@
   <div>
     <button
       class="flex items-center justify-between px-3 py-2 bg-grey-100 w-36 text-white rounded-sm"
-      @click="setExpanded(isOptionsExpanded)"
+      @click="setExpanded()"
       @blur="isOptionsExpanded = false"
     >
       <svgicon icon="filler" color="white" width="24" height="auto"></svgicon>
@@ -25,7 +25,7 @@ import "../icons/index"
 export default {
   data() {
     return {
-      isOptionsExpanded: false,
+      expand: false, 
     };
   },
   props: {
@@ -33,24 +33,26 @@ export default {
       type: String,
       required: true,
     },     
+    isOptionsExpanded: {
+      default: false,
+      type: Boolean,
+      required: true,
+    }
   },
   methods: {
-    setExpanded(isOptionsExpanded) {
-      console.log('isOptionsExpandeed', this.isOptionsExpanded);
-      this.isOptionsExpanded = !this.isOptionsExpanded;
-      console.log('POST isOptionsExpandeed', this.isOptionsExpanded);
-      this.$emit('options-expanded', this.isOptionsExpanded);
-      
+    setExpanded() {
+      //Makes expand equals the coming props isOptionsExpanded 
+      this.expand = !this.isOptionsExpanded;
+      this.$emit('options-expanded', this.expand);
     },
   },
-  /*
-  watch: {
-    expandedValue(isOptionsExpanded) {
-      console.log('isOptionsExpanded Bdrop', isOptionsExpanded);
-      this.isOptionsExpanded = isOptionsExpanded;
-    }
+  
+  computed: {
+    isOptionsExpandedUpdate(){
+      return this.isOptionsExpanded;
+    },
   }
-  */
+  
 };
 
 </script>
