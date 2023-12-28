@@ -2,6 +2,8 @@
   <div>
     <button
       class="flex items-center justify-between px-3 py-2 bg-grey-100 w-36 text-white rounded-sm"
+      :disabled="isdisabled"
+      :class="isdisabled ? 'bg-grey-100/[.12]' : 'bg-grey-100'"
       @click="setExpanded()"
       @blur="isOptionsExpanded = false"
     >
@@ -26,6 +28,7 @@ export default {
   data() {
     return {
       expand: false, 
+      //isdisabled: this.isdisabled,
     };
   },
   props: {
@@ -37,6 +40,10 @@ export default {
       default: false,
       type: Boolean,
       required: true,
+    },
+    isdisabled: {
+      //default: fal,
+      type: Boolean,
     }
   },
   methods: {
@@ -46,6 +53,11 @@ export default {
       this.$emit('options-expanded', this.expand);
     },
   },
+  //computed: {
+  	//isdisabled: function(data){
+      //return this.isdisable
+    //},
+  //}
   /*
   computed: {
     isOptionsExpandedUpdate(){

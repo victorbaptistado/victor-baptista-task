@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen items-center relative align-middle text-lg w-60">
-    <Bdrop :selected-option="newName" :is-options-expanded="updatedOptions" @options-expanded="handleDataBdrop"/>
+    <Bdrop :selected-option="newDropdownName" :is-options-expanded="updatedOptions" @options-expanded="handleDataBdrop" :isdisabled="isdisabled" />
     <Ldrop :options-array="optionsArray" :is-options-expanded="updatedOptions" @selected-option="handleDataLdrop"  />
   </div>
   
@@ -15,7 +15,7 @@ import "../icons/index"
 export default {
   data() {
     return {
-      newName: this.dropdownName,
+      newDropdownName: this.dropdownName,
       updatedOptions: this.isOptionsExpanded
     };
   },
@@ -32,6 +32,9 @@ export default {
       type: Array,
       required: true,
     },
+    isdisabled: {
+      type: Boolean,
+    }
   },
   
   methods: {
@@ -41,7 +44,7 @@ export default {
     },
     handleDataLdrop(data) {
       //Receives selected option from child Ldrop
-      this.newName = data.selectedOption;
+      this.newDropdownName = data.selectedOption;
       this.updatedOptions = false;
       //updatedOptions = this.updatedOptions;
     },

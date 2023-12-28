@@ -11,7 +11,7 @@
       >
         <ul
           v-show="isOptionsExpanded"
-          class="absolute left-0 right-0 mb-4 bg-white rounded-lg shadow-lg overflow-hidden"
+          class="absolute left-0 right-0 mb-4 bg-white rounded-sm shadow-lg overflow-hidden"
         >
           <li
             v-for="(option, index) in optionsArray"
@@ -31,14 +31,12 @@
         </ul>
       </transition>
     </div>
-      
-
     <aside
-      class="transform MD:hidden bg-grey-100 left-0 right-0 bottom-0 w-full fixed overflow-auto ease-in-out transition-all duration-300 z-30"
+      class="transform MD:hidden shadow-inner left-0 right-0 bottom-0 w-full fixed overflow-auto ease-in-out transition-all duration-300 z-30"
       :class="isOptionsExpanded ? 'translate-y-0' : 'translate-y-full'"
     >
       <ul
-        class="left-0 right-0 mb-4 overflow-hidden"
+        class="left-0 right-0 overflow-hidden"
       >
         <li
           v-for="(option, index) in optionsArray"

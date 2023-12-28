@@ -26,8 +26,10 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
   data: function data() {
     return {
       expand: false
+      //isdisabled: this.isdisabled,
     };
   },
+
   props: {
     selectedOption: {
       type: String,
@@ -37,6 +39,10 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
       "default": false,
       type: Boolean,
       required: true
+    },
+    isdisabled: {
+      //default: fal,
+      type: Boolean
     }
   },
   methods: {
@@ -46,6 +52,11 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
       this.$emit('options-expanded', this.expand);
     }
   }
+  //computed: {
+  //isdisabled: function(data){
+  //return this.isdisable
+  //},
+  //}
   /*
   computed: {
     isOptionsExpandedUpdate(){
@@ -119,7 +130,7 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      newName: this.dropdownName,
+      newDropdownName: this.dropdownName,
       updatedOptions: this.isOptionsExpanded
     };
   },
@@ -136,6 +147,9 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
     optionsArray: {
       type: Array,
       required: true
+    },
+    isdisabled: {
+      type: Boolean
     }
   },
   methods: {
@@ -145,7 +159,7 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
     },
     handleDataLdrop: function handleDataLdrop(data) {
       //Receives selected option from child Ldrop
-      this.newName = data.selectedOption;
+      this.newDropdownName = data.selectedOption;
       this.updatedOptions = false;
       //updatedOptions = this.updatedOptions;
     }
@@ -238,6 +252,10 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", [_c("button", {
     staticClass: "flex items-center justify-between px-3 py-2 bg-grey-100 w-36 text-white rounded-sm",
+    "class": _vm.isdisabled ? "bg-grey-100/[.12]" : "bg-grey-100",
+    attrs: {
+      disabled: _vm.isdisabled
+    },
     on: {
       click: function click($event) {
         return _vm.setExpanded();
@@ -382,8 +400,9 @@ var render = function render() {
     staticClass: "min-h-screen items-center relative align-middle text-lg w-60"
   }, [_c("Bdrop", {
     attrs: {
-      "selected-option": _vm.newName,
-      "is-options-expanded": _vm.updatedOptions
+      "selected-option": _vm.newDropdownName,
+      "is-options-expanded": _vm.updatedOptions,
+      isdisabled: _vm.isdisabled
     },
     on: {
       "options-expanded": _vm.handleDataBdrop
@@ -437,7 +456,7 @@ var render = function render() {
       value: _vm.isOptionsExpanded,
       expression: "isOptionsExpanded"
     }],
-    staticClass: "absolute left-0 right-0 mb-4 bg-white rounded-lg shadow-lg overflow-hidden"
+    staticClass: "absolute left-0 right-0 mb-4 bg-white rounded-sm shadow-lg overflow-hidden"
   }, _vm._l(_vm.optionsArray, function (option, index) {
     return _c("li", {
       key: index,
@@ -460,10 +479,10 @@ var render = function render() {
       staticClass: "text-wrap w-48"
     }, [_vm._v(_vm._s(option))])])])]);
   }), 0)])], 1), _vm._v(" "), _c("aside", {
-    staticClass: "transform MD:hidden bg-grey-100 left-0 right-0 bottom-0 w-full fixed overflow-auto ease-in-out transition-all duration-300 z-30",
+    staticClass: "transform MD:hidden shadow-inner left-0 right-0 bottom-0 w-full fixed overflow-auto ease-in-out transition-all duration-300 z-30",
     "class": _vm.isOptionsExpanded ? "translate-y-0" : "translate-y-full"
   }, [_c("ul", {
-    staticClass: "left-0 right-0 mb-4 overflow-hidden"
+    staticClass: "left-0 right-0 overflow-hidden"
   }, _vm._l(_vm.optionsArray, function (option, index) {
     return _c("li", {
       key: index,
