@@ -21,7 +21,7 @@
           >
             <div class="flex items-center align-middle space-x-2 text-wrap">
               <div>
-                <svgicon icon="filler" width="24" height="auto"></svgicon>
+                <svgicon v-if="!iconHide && !iconHideList" icon="filler" width="24" height="auto"></svgicon>
               </div>
               <div>
                 <p class="text-wrap w-48">{{ option }}</p>
@@ -51,7 +51,7 @@
           >
             <div class="flex items-center align-middle space-x-2 text-wrap">
               <div>
-                <svgicon icon="filler" width="24" height="auto"></svgicon>
+                <svgicon v-if="!iconHide && !iconHideList" icon="filler" width="24" height="auto"></svgicon>
               </div>
               <div>
                 <p class="text-wrap w-48">{{ option }}</p>
@@ -88,7 +88,13 @@ export default {
     optionsArray: {
       type: Array,
       required: true,
-    }    
+    },
+    iconHide: {
+      type: Boolean,
+    },
+    iconHideList: {
+      type: Boolean,
+    }  
   },
   methods: {
     //Handles the option selection

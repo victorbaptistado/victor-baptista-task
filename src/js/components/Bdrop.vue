@@ -1,13 +1,13 @@
 <template>
   <div>
     <button
-      class="flex items-center justify-between px-3 py-2 bg-grey-100 w-36 text-white rounded-sm"
+      class="flex items-center justify-between px-3 py-2 bg-grey-100  text-white rounded-sm"
       :disabled="isdisabled"
-      :class="isdisabled ? 'bg-grey-100/[.12]' : 'bg-grey-100'"
+      :class="isdisabled ? 'bg-grey-100/[.12] w-36' : 'bg-grey-100 w-32'"
       @click="setExpanded()"
       @blur="isOptionsExpanded = false"
     >
-      <svgicon icon="filler" color="white" width="24" height="auto"></svgicon>
+      <svgicon v-if="!iconHide && !iconHideBtn" icon="filler" color="white" width="24" height="auto"></svgicon>
       <span><p class="text-white">{{ selectedOption }}</p></span>
       <svgicon icon="icon-arrow" color="white" width="20" height="auto" class="h-4 w-4 transform transition-transform duration-200 ease-in-out"
         :class="isOptionsExpanded ? 'rotate-180' : 'rotate-0'"></svgicon>
@@ -42,9 +42,14 @@ export default {
       required: true,
     },
     isdisabled: {
-      //default: fal,
       type: Boolean,
-    }
+    },
+    iconHide: {
+      type: Boolean,
+    },
+    iconHideBtn: {
+      type: Boolean,
+    },
   },
   methods: {
     setExpanded() {
@@ -53,6 +58,8 @@ export default {
       this.$emit('options-expanded', this.expand);
     },
   },
+
+
   //computed: {
   	//isdisabled: function(data){
       //return this.isdisable

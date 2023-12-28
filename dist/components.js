@@ -41,7 +41,12 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
       required: true
     },
     isdisabled: {
-      //default: fal,
+      type: Boolean
+    },
+    iconHide: {
+      type: Boolean
+    },
+    iconHideBtn: {
       type: Boolean
     }
   },
@@ -52,6 +57,7 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
       this.$emit('options-expanded', this.expand);
     }
   }
+
   //computed: {
   //isdisabled: function(data){
   //return this.isdisable
@@ -150,6 +156,15 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
     },
     isdisabled: {
       type: Boolean
+    },
+    iconHide: {
+      type: Boolean
+    },
+    iconHideBtn: {
+      type: Boolean
+    },
+    iconHideList: {
+      type: Boolean
     }
   },
   methods: {
@@ -206,6 +221,12 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
     optionsArray: {
       type: Array,
       required: true
+    },
+    iconHide: {
+      type: Boolean
+    },
+    iconHideList: {
+      type: Boolean
     }
   },
   methods: {
@@ -251,8 +272,8 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", [_c("button", {
-    staticClass: "flex items-center justify-between px-3 py-2 bg-grey-100 w-36 text-white rounded-sm",
-    "class": _vm.isdisabled ? "bg-grey-100/[.12]" : "bg-grey-100",
+    staticClass: "flex items-center justify-between px-3 py-2 bg-grey-100 text-white rounded-sm",
+    "class": _vm.isdisabled ? "bg-grey-100/[.12] w-36" : "bg-grey-100 w-32",
     attrs: {
       disabled: _vm.isdisabled
     },
@@ -264,14 +285,14 @@ var render = function render() {
         _vm.isOptionsExpanded = false;
       }
     }
-  }, [_c("svgicon", {
+  }, [!_vm.iconHide && !_vm.iconHideBtn ? _c("svgicon", {
     attrs: {
       icon: "filler",
       color: "white",
       width: "24",
       height: "auto"
     }
-  }), _vm._v(" "), _c("span", [_c("p", {
+  }) : _vm._e(), _vm._v(" "), _c("span", [_c("p", {
     staticClass: "text-white"
   }, [_vm._v(_vm._s(_vm.selectedOption))])]), _vm._v(" "), _c("svgicon", {
     staticClass: "h-4 w-4 transform transition-transform duration-200 ease-in-out",
@@ -402,7 +423,9 @@ var render = function render() {
     attrs: {
       "selected-option": _vm.newDropdownName,
       "is-options-expanded": _vm.updatedOptions,
-      isdisabled: _vm.isdisabled
+      isdisabled: _vm.isdisabled,
+      "icon-hide": _vm.iconHide,
+      "icon-hide-btn": _vm.iconHideBtn
     },
     on: {
       "options-expanded": _vm.handleDataBdrop
@@ -410,7 +433,9 @@ var render = function render() {
   }), _vm._v(" "), _c("Ldrop", {
     attrs: {
       "options-array": _vm.optionsArray,
-      "is-options-expanded": _vm.updatedOptions
+      "is-options-expanded": _vm.updatedOptions,
+      "icon-hide": _vm.iconHide,
+      "icon-hide-list": _vm.iconHideList
     },
     on: {
       "selected-option": _vm.handleDataLdrop
@@ -469,13 +494,13 @@ var render = function render() {
       }
     }, [_c("div", {
       staticClass: "flex items-center align-middle space-x-2 text-wrap"
-    }, [_c("div", [_c("svgicon", {
+    }, [_c("div", [!_vm.iconHide && !_vm.iconHideList ? _c("svgicon", {
       attrs: {
         icon: "filler",
         width: "24",
         height: "auto"
       }
-    })], 1), _vm._v(" "), _c("div", [_c("p", {
+    }) : _vm._e()], 1), _vm._v(" "), _c("div", [_c("p", {
       staticClass: "text-wrap w-48"
     }, [_vm._v(_vm._s(option))])])])]);
   }), 0)])], 1), _vm._v(" "), _c("aside", {
@@ -505,13 +530,13 @@ var render = function render() {
       }
     }, [_c("div", {
       staticClass: "flex items-center align-middle space-x-2 text-wrap"
-    }, [_c("div", [_c("svgicon", {
+    }, [_c("div", [!_vm.iconHide && !_vm.iconHideList ? _c("svgicon", {
       attrs: {
         icon: "filler",
         width: "24",
         height: "auto"
       }
-    })], 1), _vm._v(" "), _c("div", [_c("p", {
+    }) : _vm._e()], 1), _vm._v(" "), _c("div", [_c("p", {
       staticClass: "text-wrap w-48"
     }, [_vm._v(_vm._s(option))])])])])]);
   }), 0)])]);
