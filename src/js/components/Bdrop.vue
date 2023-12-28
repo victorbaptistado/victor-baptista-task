@@ -8,7 +8,7 @@
       @blur="isOptionsExpanded = false"
     >
       <svgicon v-if="!iconHide && !iconHideBtn" icon="filler" color="white" width="24" height="auto"></svgicon>
-      <span><p class="text-white">{{ selectedOption }}</p></span>
+      <span><p class="text-white font-ceraproMedium">{{ selectedOption }}</p></span>
       <svgicon icon="icon-arrow" color="white" width="20" height="auto" class="h-4 w-4 transform transition-transform duration-200 ease-in-out"
         :class="isOptionsExpanded ? 'rotate-180' : 'rotate-0'"></svgicon>
     </button>

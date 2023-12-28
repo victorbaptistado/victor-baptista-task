@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
     future: {},
     purge: {
@@ -18,7 +20,11 @@ module.exports = {
             200: '#9898A3',
             300: '#202020'
           }
-        }   
+        },
+        fontFamily: {
+          sans: ["cerapro-regular", "sans-serif"],
+          ceraproMedium: ["cerapro-medium", "sans-serif"],
+        },   
       },
       screens: {
         'SM': '540px',
@@ -26,6 +32,7 @@ module.exports = {
         'LG': '960px',
         'XL': '1140px'
       },
+      
     },
     plugins: [],
     prefix: '',

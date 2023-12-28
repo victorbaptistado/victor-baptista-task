@@ -293,7 +293,7 @@ var render = function render() {
       height: "auto"
     }
   }) : _vm._e(), _vm._v(" "), _c("span", [_c("p", {
-    staticClass: "text-white"
+    staticClass: "text-white font-ceraproMedium"
   }, [_vm._v(_vm._s(_vm.selectedOption))])]), _vm._v(" "), _c("svgicon", {
     staticClass: "h-4 w-4 transform transition-transform duration-200 ease-in-out",
     "class": _vm.isOptionsExpanded ? "rotate-180" : "rotate-0",
@@ -504,7 +504,7 @@ var render = function render() {
       staticClass: "text-wrap w-48"
     }, [_vm._v(_vm._s(option))])])])]);
   }), 0)])], 1), _vm._v(" "), _c("aside", {
-    staticClass: "transform MD:hidden shadow-inner left-0 right-0 bottom-0 w-full fixed overflow-auto ease-in-out transition-all duration-300 z-30",
+    staticClass: "transform MD:hidden bg-white shadow-inner left-0 right-0 bottom-0 w-full fixed overflow-auto ease-in-out transition-all duration-300 z-30",
     "class": _vm.isOptionsExpanded ? "translate-y-0" : "translate-y-full"
   }, [_c("ul", {
     staticClass: "left-0 right-0 overflow-hidden"

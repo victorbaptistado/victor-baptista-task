@@ -3,6 +3,20 @@
 @tailwind utilities;
 
 
-@layer base {}
+@layer base {
+  @font-face { 
+    font-family: "cerapro-medium"; 
+    src: url("/cerapro-medium.otf"); 
+  }
+}
+@layer base {
+  @font-face { 
+    font-family: "cerapro-regular"; 
+    src: url("/cerapro-regular.otf"); 
+  }
+}
+
 
 @import "tailwind"
+
+

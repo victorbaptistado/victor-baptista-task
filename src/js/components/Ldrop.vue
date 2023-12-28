@@ -32,7 +32,7 @@
       </transition>
     </div>
     <aside
-      class="transform MD:hidden shadow-inner left-0 right-0 bottom-0 w-full fixed overflow-auto ease-in-out transition-all duration-300 z-30"
+      class="transform MD:hidden bg-white shadow-inner left-0 right-0 bottom-0 w-full fixed overflow-auto ease-in-out transition-all duration-300 z-30"
       :class="isOptionsExpanded ? 'translate-y-0' : 'translate-y-full'"
     >
       <ul
