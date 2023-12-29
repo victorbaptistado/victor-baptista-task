@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen items-center relative align-middle text-lg w-60">
-    <Bdrop :error="error" :selected-option="newDropdownName" :is-options-expanded="updatedOptions" @options-expanded="handleDataBdrop" :isdisabled="isdisabled" :icon-hide="iconHide" :icon-hide-btn="iconHideBtn" />
+    <Bdrop :error="error" :selected-option="newDropdownName" :is-options-expanded="updatedOptions" @options-expanded="handleDataBdrop" :is-disabled="isDisabled" :icon-hide="iconHide" :icon-hide-btn="iconHideBtn" />
     <Ldrop :options-array="optionsArray" :is-options-expanded="updatedOptions" @selected-option="handleDataLdrop" :icon-hide="iconHide" :icon-hide-list="iconHideList" />
   </div>
   
@@ -32,7 +32,7 @@ export default {
       type: Array,
       //required: true,
     },
-    isdisabled: {
+    isDisabled: {
       type: Boolean,
     },
     iconHide: {

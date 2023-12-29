@@ -1,9 +1,9 @@
 <template>
   <div>
     <button
-      class="flex items-center justify-between px-3 py-2 bg-grey-100 w-36 text-white rounded-sm"
-      :disabled="isdisabled"
-      :class="isdisabled ? 'bg-grey-100/[.12]' : 'bg-grey-100' && error ? 'border-2 border-red-500/80' : ''"
+      class="flex items-center justify-around px-3 py-2 bg-grey-100 text-white rounded-sm"
+      :disabled="isDisabled"
+      :class="[isDisabled ? 'bg-grey-100/[.12]' : 'bg-grey-100', error ? 'border-2 border-red-500/80' : '', iconHide ? 'w-32' : 'w-36']"
       @click="setExpanded()"
       @blur="isOptionsExpanded = false"
     >
@@ -41,7 +41,7 @@ export default {
       type: Boolean,
       required: true,
     },
-    isdisabled: {
+    isDisabled: {
       type: Boolean,
     },
     iconHide: {

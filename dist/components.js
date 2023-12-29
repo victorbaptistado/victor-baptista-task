@@ -40,7 +40,7 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
       type: Boolean,
       required: true
     },
-    isdisabled: {
+    isDisabled: {
       type: Boolean
     },
     iconHide: {
@@ -157,7 +157,7 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
       //required: true,
     },
 
-    isdisabled: {
+    isDisabled: {
       type: Boolean
     },
     iconHide: {
@@ -328,10 +328,10 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", [_c("button", {
-    staticClass: "flex items-center justify-between px-3 py-2 bg-grey-100 w-36 text-white rounded-sm",
-    "class": _vm.isdisabled ? "bg-grey-100/[.12]" :  true && _vm.error ? "border-2 border-red-500/80" : "",
+    staticClass: "flex items-center justify-around px-3 py-2 bg-grey-100 text-white rounded-sm",
+    "class": [_vm.isDisabled ? "bg-grey-100/[.12]" : "bg-grey-100", _vm.error ? "border-2 border-red-500/80" : "", _vm.iconHide ? "w-32" : "w-36"],
     attrs: {
-      disabled: _vm.isdisabled
+      disabled: _vm.isDisabled
     },
     on: {
       click: function click($event) {
@@ -480,7 +480,7 @@ var render = function render() {
       error: _vm.error,
       "selected-option": _vm.newDropdownName,
       "is-options-expanded": _vm.updatedOptions,
-      isdisabled: _vm.isdisabled,
+      "is-disabled": _vm.isDisabled,
       "icon-hide": _vm.iconHide,
       "icon-hide-btn": _vm.iconHideBtn
     },
