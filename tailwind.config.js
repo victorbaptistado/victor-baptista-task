@@ -19,7 +19,7 @@ module.exports = {
             100: '#AEAEBA',
             200: '#9898A3',
             300: '#202020'
-          }
+          },
         },
         fontFamily: {
           sans: ["cerapro-regular", "sans-serif"],

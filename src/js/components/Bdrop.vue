@@ -1,9 +1,9 @@
 <template>
   <div>
     <button
-      class="flex items-center justify-between px-3 py-2 bg-grey-100  text-white rounded-sm"
+      class="flex items-center justify-between px-3 py-2 bg-grey-100 w-36 text-white rounded-sm"
       :disabled="isdisabled"
-      :class="isdisabled ? 'bg-grey-100/[.12] w-36' : 'bg-grey-100 w-32'"
+      :class="isdisabled ? 'bg-grey-100/[.12]' : 'bg-grey-100' && error ? 'border-2 border-red-500/80' : ''"
       @click="setExpanded()"
       @blur="isOptionsExpanded = false"
     >
@@ -50,6 +50,9 @@ export default {
     iconHideBtn: {
       type: Boolean,
     },
+    error: {
+      type: Boolean,
+    }
   },
   methods: {
     setExpanded() {

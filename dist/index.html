@@ -10,8 +10,7 @@
         class="p-8 flex flex-col overflow-x-hidden justify-start items-start"
       >
         <!--insert components here-->
-        <!--<Child/>-->
-        <Dropdown :options-array="['Option 1', 'Option 2', 'Option 3']" :dropdown-name="'Good'"/>
+        <Dropdown :options-array="[]" :dropdown-name="'Good'" @selected-option="handleSelectedOption" icon-hide/>
       </div>
     </div>
 
@@ -19,9 +18,14 @@
     <script>
       new components({
         el: "#components",
+        methods: {
+          handleSelectedOption(option) {
+            //Uses the selected value
+            console.log('Selected option:', option);
+            selectedOption = this.option;
+          },
+        },
       });
-      
-      
     </script>
   </body>
 </html>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="hidden MD:block">
+    <div class="hidden MD:block" >
       <transition
         enter-active-class="transform transition duration-500 ease-custom"
         enter-class="-translate-y-1/2 scale-y-0 opacity-0"
@@ -11,6 +11,7 @@
       >
         <ul
           v-show="isOptionsExpanded"
+          @blur="handleBlur"
           class="absolute left-0 right-0 mb-4 bg-white rounded-sm shadow-lg overflow-hidden"
         >
           <li
@@ -32,7 +33,7 @@
       </transition>
     </div>
     <aside
-      class="transform MD:hidden bg-white shadow-inner left-0 right-0 bottom-0 w-full fixed overflow-auto ease-in-out transition-all duration-300 z-30"
+      class="transform MD:hidden bg-white shadow-inner left-0 right-0 bottom-0 w-full fixed overflow-auto ease-in-out transition-all duration-300 z-30 py-4"
       :class="isOptionsExpanded ? 'translate-y-0' : 'translate-y-full'"
     >
       <ul
@@ -62,6 +63,7 @@
       </ul>
     </aside>
   </div>
+  </div>
 </template>
 
 <script>
@@ -73,8 +75,9 @@ import "../icons/index"
 export default {
   data() {
     return {
-      //isOpen: false,
       //expanded: this.isOptionsExpanded,
+      //error: false,
+      handleBlur: Function,
     };
   },
   props: {
@@ -87,7 +90,6 @@ export default {
     },
     optionsArray: {
       type: Array,
-      required: true,
     },
     iconHide: {
       type: Boolean,
@@ -104,8 +106,44 @@ export default {
     },
     drawer() {
       this.isOptionsExpanded = !this.isOptionsExpanded;
+    },
+  }, 
+  watch: {
+    /*
+    handleBlur: function() {
+      console.log("goood")
+      this.isOptionsExpanded = false;
+    },
+    */
+  	isOptionsExpanded: function(data){
+      console.log('data', data)
+       return this.isOptionsExpanded;
+    },
+    optionsArray: function(data){
+      console.log('data3',data);
+      if(this.optionsArray.length === 0){
+        return this.error = true;
+      }
+    }
+    
+  },
+  computed: {
+    error: {
+      // getter
+      get: function () {
+        if(this.optionsArray.length === 0){
+          return this.error = true;
+        } 
+        return this.error = false;
+      },
+      // setter
+      set: function (optionsArray) {
+        return optionsArray;
+      }
     }
   },
+
+  /*
   watch: {
     isOptionsExpanded: {
       immediate: true,
@@ -117,9 +155,17 @@ export default {
       }
     }
   },
+  */
 };
 </script>
 
 <style>
+.error-state {
+  border: 2px solid red; /* Example: Apply a red border for the error state */
+}
 
+.error-message {
+  color: red;
+  font-size: 14px;
+}
 </style>
