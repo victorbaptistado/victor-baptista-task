@@ -11,7 +11,6 @@
       >
         <ul
           v-show="isOptionsExpanded"
-          @blur="handleBlur"
           class="absolute left-0 right-0 mb-4 bg-white rounded-sm shadow-lg overflow-hidden"
         >
           <li
@@ -44,10 +43,10 @@
           :key="index"
           class="px-3 p-4 py-2 transition-colors duration-300"
           @mousedown.prevent="setOption(option)"
-          @click="isOptionsExpanded = false"
+          @click="expand = false"
         >
           <span
-          @click="isOptionsExpanded = false"
+          @click="expand = false"
           class="flex w-full items-center"
           >
             <div class="flex items-center align-middle space-x-2 text-wrap">
@@ -75,15 +74,13 @@ import "../icons/index"
 export default {
   data() {
     return {
-      //expanded: this.isOptionsExpanded,
-      //error: false,
-      handleBlur: Function,
     };
   },
   props: {
-    updatedOptions: {
+    /*updatedOptions: {
       type: Boolean
     },
+    */
     isOptionsExpanded: {
       type: Boolean,
       required: true,
@@ -104,45 +101,36 @@ export default {
       //Sends selected option to parent Bdrop 
       this.$emit('selected-option', {selectedOption: option, isOptionsExpanded: this.isOptionsExpanded });
     },
-    drawer() {
-      this.isOptionsExpanded = !this.isOptionsExpanded;
-    },
   }, 
   watch: {
     /*
-    handleBlur: function() {
-      console.log("goood")
-      this.isOptionsExpanded = false;
-    },
-    */
-  	isOptionsExpanded: function(data){
+    isOptionsExpanded: function(data){
       console.log('data', data)
-       return this.isOptionsExpanded;
-    },
-    optionsArray: function(data){
-      console.log('data3',data);
-      if(this.optionsArray.length === 0){
-        return this.error = true;
-      }
-    }
+      return this.isOptionsExpanded;
+    },*/
+
     
   },
   computed: {
     error: {
-      // getter
       get: function () {
         if(this.optionsArray.length === 0){
           return this.error = true;
         } 
         return this.error = false;
       },
-      // setter
       set: function (optionsArray) {
         return optionsArray;
       }
     }
   },
-
+  handleClickAway() {
+      return () => { 
+        //closeClickAway = false;
+        this.expand = false;
+        return this.expand;
+      }
+    },  
   /*
   watch: {
     isOptionsExpanded: {

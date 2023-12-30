@@ -26,10 +26,8 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
   data: function data() {
     return {
       expand: false
-      //isdisabled: this.isdisabled,
     };
   },
-
   props: {
     selectedOption: {
       type: String,
@@ -57,22 +55,31 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
     setExpanded: function setExpanded() {
       //Makes expand equals the coming props isOptionsExpanded 
       this.expand = !this.isOptionsExpanded;
+      console.log('here', this.expand);
       this.$emit('options-expanded', this.expand);
     }
-  }
-
-  //computed: {
-  //isdisabled: function(data){
-  //return this.isdisable
-  //},
-  //}
-  /*
+  },
   computed: {
-    isOptionsExpandedUpdate(){
-      return this.isOptionsExpanded;
-    },
+    handleClickAway: function handleClickAway() {
+      var _this = this;
+      return function () {
+        //closeClickAway = false;
+        _this.expand = false;
+        return _this.expand;
+      };
+    }
+    /*
+    closeClickAway: {
+      get: function () {
+        console.log('this.isOptionsExpanded',this.isOptionsExpanded);
+        return this.isOptionsExpanded;
+      },
+      set: function (isOptionsExpanded) {
+        return isOptionsExpanded;
+      }
+    }
+    */
   }
-  */
 });
 
 /***/ }),
@@ -140,23 +147,17 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
   data: function data() {
     return {
       newDropdownName: this.dropdownName,
-      updatedOptions: this.isOptionsExpanded
+      expand: false
     };
   },
   props: {
-    isOptionsExpanded: {
-      type: Boolean,
-      "default": false
-    },
     dropdownName: {
       type: String,
       "default": "Button"
     },
     optionsArray: {
       type: Array
-      //required: true,
     },
-
     isDisabled: {
       type: Boolean
     },
@@ -170,30 +171,32 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
       type: Boolean
     }
   },
-  methods: {
-    handleDataBdrop: function handleDataBdrop(isOptionsExpanded) {
-      //Receives Expanding Boolean from child Bdrop
-      this.updatedOptions = isOptionsExpanded;
-    },
-    handleDataLdrop: function handleDataLdrop(data) {
-      //Receives selected option from child Ldrop
-
-      //Emits selected option to HTML
-      this.$emit('selected-option', data.selectedOption);
-      this.newDropdownName = data.selectedOption;
-      this.updatedOptions = false;
-    }
-  },
   computed: {
+    handleDataBdrop: function handleDataBdrop() {
+      var _this = this;
+      return function (expand) {
+        _this.expand = expand;
+      };
+    },
+    handleDataLdrop: function handleDataLdrop() {
+      var _this2 = this;
+      //Receives selected option from child Ldrop
+      return function (data) {
+        //Emits selected option to HTML
+        _this2.$emit('selected-option', data.selectedOption);
+        //Dropdown Name Updated to Selected Option
+        _this2.newDropdownName = data.selectedOption;
+        //Close Dropdown once Option selected
+        _this2.expand = false;
+      };
+    },
     error: {
-      // getter
       get: function get() {
         if (this.optionsArray.length === 0) {
           return this.error = true;
         }
         return this.error = false;
       },
-      // setter
       set: function set(optionsArray) {
         return optionsArray;
       }
@@ -224,16 +227,13 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
-    return {
-      //expanded: this.isOptionsExpanded,
-      //error: false,
-      handleBlur: Function
-    };
+    return {};
   },
   props: {
-    updatedOptions: {
+    /*updatedOptions: {
       type: Boolean
     },
+    */
     isOptionsExpanded: {
       type: Boolean,
       required: true
@@ -256,45 +256,36 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
         selectedOption: option,
         isOptionsExpanded: this.isOptionsExpanded
       });
-    },
-    drawer: function drawer() {
-      this.isOptionsExpanded = !this.isOptionsExpanded;
     }
   },
   watch: {
     /*
-    handleBlur: function() {
-      console.log("goood")
-      this.isOptionsExpanded = false;
-    },
-    */
-    isOptionsExpanded: function isOptionsExpanded(data) {
-      console.log('data', data);
+    isOptionsExpanded: function(data){
+      console.log('data', data)
       return this.isOptionsExpanded;
-    },
-    optionsArray: function optionsArray(data) {
-      console.log('data3', data);
-      if (this.optionsArray.length === 0) {
-        return this.error = true;
-      }
-    }
+    },*/
   },
   computed: {
     error: {
-      // getter
       get: function get() {
         if (this.optionsArray.length === 0) {
           return this.error = true;
         }
         return this.error = false;
       },
-      // setter
       set: function set(optionsArray) {
         return optionsArray;
       }
     }
+  },
+  handleClickAway: function handleClickAway() {
+    var _this = this;
+    return function () {
+      //closeClickAway = false;
+      _this.expand = false;
+      return _this.expand;
+    };
   }
-
   /*
   watch: {
     isOptionsExpanded: {
@@ -337,9 +328,7 @@ var render = function render() {
       click: function click($event) {
         return _vm.setExpanded();
       },
-      blur: function blur($event) {
-        _vm.isOptionsExpanded = false;
-      }
+      blur: _vm.handleClickAway
     }
   }, [!_vm.iconHide && !_vm.iconHideBtn ? _c("svgicon", {
     attrs: {
@@ -479,7 +468,7 @@ var render = function render() {
     attrs: {
       error: _vm.error,
       "selected-option": _vm.newDropdownName,
-      "is-options-expanded": _vm.updatedOptions,
+      "is-options-expanded": _vm.expand,
       "is-disabled": _vm.isDisabled,
       "icon-hide": _vm.iconHide,
       "icon-hide-btn": _vm.iconHideBtn
@@ -490,7 +479,7 @@ var render = function render() {
   }), _vm._v(" "), _c("Ldrop", {
     attrs: {
       "options-array": _vm.optionsArray,
-      "is-options-expanded": _vm.updatedOptions,
+      "is-options-expanded": _vm.expand,
       "icon-hide": _vm.iconHide,
       "icon-hide-list": _vm.iconHideList
     },
@@ -538,10 +527,7 @@ var render = function render() {
       value: _vm.isOptionsExpanded,
       expression: "isOptionsExpanded"
     }],
-    staticClass: "absolute left-0 right-0 mb-4 bg-white rounded-sm shadow-lg overflow-hidden",
-    on: {
-      blur: _vm.handleBlur
-    }
+    staticClass: "absolute left-0 right-0 mb-4 bg-white rounded-sm shadow-lg overflow-hidden"
   }, _vm._l(_vm.optionsArray, function (option, index) {
     return _c("li", {
       key: index,
@@ -578,14 +564,14 @@ var render = function render() {
           return _vm.setOption(option);
         },
         click: function click($event) {
-          _vm.isOptionsExpanded = false;
+          _vm.expand = false;
         }
       }
     }, [_c("span", {
       staticClass: "flex w-full items-center",
       on: {
         click: function click($event) {
-          _vm.isOptionsExpanded = false;
+          _vm.expand = false;
         }
       }
     }, [_c("div", {
