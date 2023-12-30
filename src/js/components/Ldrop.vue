@@ -43,7 +43,7 @@
           :key="index"
           class="px-3 p-4 py-2 transition-colors duration-300"
           @mousedown.prevent="setOption(option)"
-          @click="expand = false"
+          
         >
           <span
           @click="expand = false"
@@ -82,6 +82,7 @@ export default {
     },
     */
     isOptionsExpanded: {
+      default: false,
       type: Boolean,
       required: true,
     },
@@ -98,8 +99,8 @@ export default {
   methods: {
     //Handles the option selection
     setOption(option) {
-      //Sends selected option to parent Bdrop 
-      this.$emit('selected-option', {selectedOption: option, isOptionsExpanded: this.isOptionsExpanded });
+      //Sends selected option to parent Bdrop
+      this.$emit('selected-option', {selectedOption: option });
     },
   }, 
   watch: {
@@ -112,6 +113,14 @@ export default {
     
   },
   computed: {
+    expand: {
+      get: function () {
+          return this.isOptionsExpanded;
+      },
+      set: function (isOptionsExpanded) {
+        return isOptionsExpanded;
+      }
+    },
     error: {
       get: function () {
         if(this.optionsArray.length === 0){

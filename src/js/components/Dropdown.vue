@@ -41,13 +41,15 @@ export default {
     },
   },
   
+  methods: {
+  },
   computed: {
-    handleDataBdrop() {
+    handleDataBdrop(expand) {
       return (expand) => { 
         this.expand = expand;
       }
     }, 
-    handleDataLdrop() {
+    handleDataLdrop(data) {
       //Receives selected option from child Ldrop
       return (data) => { 
         //Emits selected option to HTML
@@ -58,6 +60,7 @@ export default {
         this.expand = false;
       }
     }, 
+
     error: {
       get: function () {
         if(this.optionsArray.length === 0){

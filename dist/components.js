@@ -55,7 +55,6 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
     setExpanded: function setExpanded() {
       //Makes expand equals the coming props isOptionsExpanded 
       this.expand = !this.isOptionsExpanded;
-      console.log('here', this.expand);
       this.$emit('options-expanded', this.expand);
     }
   },
@@ -171,14 +170,15 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
       type: Boolean
     }
   },
+  methods: {},
   computed: {
-    handleDataBdrop: function handleDataBdrop() {
+    handleDataBdrop: function handleDataBdrop(expand) {
       var _this = this;
       return function (expand) {
         _this.expand = expand;
       };
     },
-    handleDataLdrop: function handleDataLdrop() {
+    handleDataLdrop: function handleDataLdrop(data) {
       var _this2 = this;
       //Receives selected option from child Ldrop
       return function (data) {
@@ -235,6 +235,7 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
     },
     */
     isOptionsExpanded: {
+      "default": false,
       type: Boolean,
       required: true
     },
@@ -251,10 +252,9 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
   methods: {
     //Handles the option selection
     setOption: function setOption(option) {
-      //Sends selected option to parent Bdrop 
+      //Sends selected option to parent Bdrop
       this.$emit('selected-option', {
-        selectedOption: option,
-        isOptionsExpanded: this.isOptionsExpanded
+        selectedOption: option
       });
     }
   },
@@ -266,6 +266,14 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
     },*/
   },
   computed: {
+    expand: {
+      get: function get() {
+        return this.isOptionsExpanded;
+      },
+      set: function set(isOptionsExpanded) {
+        return isOptionsExpanded;
+      }
+    },
     error: {
       get: function get() {
         if (this.optionsArray.length === 0) {
@@ -562,9 +570,6 @@ var render = function render() {
         mousedown: function mousedown($event) {
           $event.preventDefault();
           return _vm.setOption(option);
-        },
-        click: function click($event) {
-          _vm.expand = false;
         }
       }
     }, [_c("span", {

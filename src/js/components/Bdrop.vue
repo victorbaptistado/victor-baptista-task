@@ -57,7 +57,6 @@ export default {
     setExpanded() {
       //Makes expand equals the coming props isOptionsExpanded 
       this.expand = !this.isOptionsExpanded;
-      console.log('here', this.expand);
       this.$emit('options-expanded', this.expand);
     },
   },
