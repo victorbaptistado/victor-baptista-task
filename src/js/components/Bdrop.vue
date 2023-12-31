@@ -27,7 +27,7 @@ import "../icons/index"
 export default {
   data() {
     return {
-      expand: false, 
+      expand: this.isOptionExpanded, 
     };
   },
   props: {
@@ -64,9 +64,8 @@ export default {
   computed: {
     handleClickAway() {
       return () => { 
-        //closeClickAway = false;
         this.expand = false;
-        return this.expand;
+        //return this.expand;
       }
     },  
     /*

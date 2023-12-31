@@ -25,7 +25,7 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      expand: false
+      expand: this.isOptionExpanded
     };
   },
   props: {
@@ -62,9 +62,8 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
     handleClickAway: function handleClickAway() {
       var _this = this;
       return function () {
-        //closeClickAway = false;
         _this.expand = false;
-        return _this.expand;
+        //return this.expand;
       };
     }
     /*
@@ -170,7 +169,23 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
       type: Boolean
     }
   },
-  methods: {},
+  mounted: function mounted() {
+    // Attach a click event listener to the document
+    document.addEventListener("click", this.handleClickAway);
+  },
+  destroyed: function destroyed() {
+    // Remove the click event listener when the component is destroyed
+    document.removeEventListener("click", this.handleClickAway);
+  },
+  methods: {
+    handleClickAway: function handleClickAway(event) {
+      // Check if the clicked element is outside the dropdown container
+      if (!this.$refs.dropdownContainer.contains(event.target)) {
+        // Handle the click outside logic here
+        this.expand = false;
+      }
+    }
+  },
   computed: {
     handleDataBdrop: function handleDataBdrop(expand) {
       var _this = this;
@@ -471,6 +486,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
+    ref: "dropdownContainer",
     staticClass: "min-h-screen items-center relative align-middle text-lg w-60"
   }, [_c("Bdrop", {
     attrs: {
