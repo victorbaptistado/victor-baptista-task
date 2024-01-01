@@ -1,6 +1,7 @@
 <template>
   <div>
     <button
+      ref="dropdownContainer"
       class="flex items-center justify-around px-3 py-2 bg-grey-100 text-white rounded-sm"
       :disabled="isDisabled"
       :class="[isDisabled ? 'bg-grey-100/[.12]' : 'bg-grey-100', error ? 'border-2 border-red-500/80' : '', iconHide ? 'w-32' : 'w-36']"
@@ -26,7 +27,7 @@ import "../icons/index"
 export default {
   data() {
     return {
-      expand: this.isOptionExpanded, 
+      expand: false, 
     };
   },
   props: {
@@ -58,7 +59,26 @@ export default {
       this.expand = !this.isOptionsExpanded;
       this.$emit('handleDataBdrop', this.expand);
     },
+    handleClickAway(event) {
+      // Checks if the clicked element is outside the dropdown container
+      if (!this.$refs.dropdownContainer.contains(event.target)) {
+        //Close Dropdown with any click outside the Button tag, including the selection of the option
+        this.expand = false;
+        this.$emit('handleDataBdrop', this.expand);
+      }
+    },
   },
+
+  mounted() {
+    // Click event listener to the entire document
+    window.addEventListener("click", this.handleClickAway);
+  },
+  destroyed() {
+    // Remove click event when the component is destroyed
+    window.removeEventListener("click", this.handleClickAway);
+  },
+
+  
 };
 
 </script>

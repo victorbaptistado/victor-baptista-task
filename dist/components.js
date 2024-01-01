@@ -25,7 +25,7 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      expand: this.isOptionExpanded
+      expand: false
     };
   },
   props: {
@@ -56,7 +56,23 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
       //Makes expand equals the coming props isOptionsExpanded 
       this.expand = !this.isOptionsExpanded;
       this.$emit('handleDataBdrop', this.expand);
+    },
+    handleClickAway: function handleClickAway(event) {
+      // Checks if the clicked element is outside the dropdown container
+      if (!this.$refs.dropdownContainer.contains(event.target)) {
+        //Close Dropdown with any click outside the Button tag, including the selection of the option
+        this.expand = false;
+        this.$emit('handleDataBdrop', this.expand);
+      }
     }
+  },
+  mounted: function mounted() {
+    // Click event listener to the entire document
+    window.addEventListener("click", this.handleClickAway);
+  },
+  destroyed: function destroyed() {
+    // Remove click event when the component is destroyed
+    window.removeEventListener("click", this.handleClickAway);
   }
 });
 
@@ -149,23 +165,6 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
       type: Boolean
     }
   },
-  mounted: function mounted() {
-    // Click event listener to the entire document
-    document.addEventListener("click", this.handleClickAway);
-  },
-  destroyed: function destroyed() {
-    // Remove click event when the component is destroyed
-    document.removeEventListener("click", this.handleClickAway);
-  },
-  methods: {
-    handleClickAway: function handleClickAway(event) {
-      // Checks if the clicked element is outside the dropdown container
-      if (!this.$refs.dropdownContainer.contains(event.target)) {
-        // Handle the click outside logic 
-        this.expand = false;
-      }
-    }
-  },
   computed: {
     handleDataBdrop: function handleDataBdrop() {
       var _this = this;
@@ -182,8 +181,6 @@ Vue.use((vue_svgicon__WEBPACK_IMPORTED_MODULE_0___default()));
         _this2.$emit('selected-option', data.selectedOption);
         //Dropdown Name Updated to Selected Option
         _this2.newDropdownName = data.selectedOption;
-        //Close Dropdown once Option selected
-        _this2.expand = false;
       };
     },
     error: {
@@ -288,6 +285,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", [_c("button", {
+    ref: "dropdownContainer",
     staticClass: "flex items-center justify-around px-3 py-2 bg-grey-100 text-white rounded-sm",
     "class": [_vm.isDisabled ? "bg-grey-100/[.12]" : "bg-grey-100", _vm.error ? "border-2 border-red-500/80" : "", _vm.iconHide ? "w-32" : "w-36"],
     attrs: {
@@ -431,7 +429,6 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    ref: "dropdownContainer",
     staticClass: "min-h-screen items-center relative align-middle text-lg w-60"
   }, [_c("Bdrop", {
     attrs: {
@@ -500,7 +497,7 @@ var render = function render() {
   }, _vm._l(_vm.optionsArray, function (option, index) {
     return _c("li", {
       key: index,
-      staticClass: "px-3 py-2 transition-colors duration-300 hover:bg-gray-200",
+      staticClass: "px-3 py-2 transition-colors duration-300 hover:bg-gray-200 overflow-wrap",
       on: {
         mousedown: function mousedown($event) {
           $event.preventDefault();
@@ -533,13 +530,6 @@ var render = function render() {
           return _vm.setOption(option);
         }
       }
-    }, [_c("span", {
-      staticClass: "flex w-full items-center",
-      on: {
-        click: function click($event) {
-          _vm.expand = false;
-        }
-      }
     }, [_c("div", {
       staticClass: "flex items-center align-middle space-x-2 text-wrap"
     }, [_c("div", [!_vm.iconHide && !_vm.iconHideList ? _c("svgicon", {
@@ -549,8 +539,8 @@ var render = function render() {
         height: "auto"
       }
     }) : _vm._e()], 1), _vm._v(" "), _c("div", [_c("p", {
-      staticClass: "text-wrap w-48"
-    }, [_vm._v(_vm._s(option))])])])])]);
+      staticClass: "text-wrap"
+    }, [_vm._v(_vm._s(option))])])])]);
   }), 0)])]);
 };
 var staticRenderFns = [];

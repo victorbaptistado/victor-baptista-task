@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen items-center relative align-middle text-lg w-60" ref="dropdownContainer" >
+  <div class="min-h-screen items-center relative align-middle text-lg w-60"  >
     <Bdrop :is-options-expanded="expand" :selected-option="newDropdownName" @handleDataBdrop="handleDataBdrop" :is-disabled="isDisabled" :icon-hide="iconHide" :icon-hide-btn="iconHideBtn" :error="error" />
     <Ldrop :is-options-expanded="expand" :options-array="optionsArray" @handleDataLdrop="handleDataLdrop" :icon-hide="iconHide" :icon-hide-list="iconHideList" />
   </div>
@@ -41,23 +41,7 @@ export default {
     },
   },
   
-  mounted() {
-    // Click event listener to the entire document
-    document.addEventListener("click", this.handleClickAway);
-  },
-  destroyed() {
-    // Remove click event when the component is destroyed
-    document.removeEventListener("click", this.handleClickAway);
-  },
-  methods: {
-    handleClickAway(event) {
-      // Checks if the clicked element is outside the dropdown container
-      if (!this.$refs.dropdownContainer.contains(event.target)) {
-        // Handle the click outside logic 
-        this.expand = false;
-      }
-    },
-  },
+  
 
   computed: {
     handleDataBdrop() {
@@ -73,8 +57,6 @@ export default {
         this.$emit('selected-option', data.selectedOption);
         //Dropdown Name Updated to Selected Option
         this.newDropdownName = data.selectedOption;
-        //Close Dropdown once Option selected
-        this.expand = false;
       }
     }, 
 

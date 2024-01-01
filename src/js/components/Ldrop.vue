@@ -16,10 +16,10 @@
           <li
             v-for="(option, index) in optionsArray"
             :key="index"
-            class="px-3 py-2 transition-colors duration-300 hover:bg-gray-200"
+            class="px-3 py-2 transition-colors duration-300 hover:bg-gray-200 overflow-wrap "
             @mousedown.prevent="setOption(option)"
           >
-            <div class="flex items-center align-middle space-x-2 text-wrap">
+            <div class="flex items-center align-middle space-x-2 text-wrap ">
               <div>
                 <svgicon v-if="!iconHide && !iconHideList" icon="filler" width="24" height="auto"></svgicon>
               </div>
@@ -43,21 +43,15 @@
           :key="index"
           class="px-3 p-4 py-2 transition-colors duration-300"
           @mousedown.prevent="setOption(option)"
-          
         >
-          <span
-          @click="expand = false"
-          class="flex w-full items-center"
-          >
-            <div class="flex items-center align-middle space-x-2 text-wrap">
-              <div>
-                <svgicon v-if="!iconHide && !iconHideList" icon="filler" width="24" height="auto"></svgicon>
-              </div>
-              <div>
-                <p class="text-wrap w-48">{{ option }}</p>
-              </div>
+          <div class="flex items-center align-middle space-x-2 text-wrap">
+            <div>
+              <svgicon v-if="!iconHide && !iconHideList" icon="filler" width="24" height="auto"></svgicon>
             </div>
-          </span>
+            <div>
+              <p class="text-wrap">{{ option }}</p>
+            </div>
+          </div>
         </li>      
       </ul>
     </aside>
