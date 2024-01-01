@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen items-center relative align-middle text-lg w-60" ref="dropdownContainer" >
-    <Bdrop :error="error" :selected-option="newDropdownName" :is-options-expanded="expand" @options-expanded="handleDataBdrop" :is-disabled="isDisabled" :icon-hide="iconHide" :icon-hide-btn="iconHideBtn" />
-    <Ldrop :options-array="optionsArray" :is-options-expanded="expand" @selected-option="handleDataLdrop" :icon-hide="iconHide" :icon-hide-list="iconHideList" />
+    <Bdrop :is-options-expanded="expand" :selected-option="newDropdownName" @handleDataBdrop="handleDataBdrop" :is-disabled="isDisabled" :icon-hide="iconHide" :icon-hide-btn="iconHideBtn" :error="error" />
+    <Ldrop :is-options-expanded="expand" :options-array="optionsArray" @handleDataLdrop="handleDataLdrop" :icon-hide="iconHide" :icon-hide-list="iconHideList" />
   </div>
   
 </template>
@@ -42,32 +42,32 @@ export default {
   },
   
   mounted() {
-    // Attach a click event listener to the document
+    // Click event listener to the entire document
     document.addEventListener("click", this.handleClickAway);
   },
   destroyed() {
-    // Remove the click event listener when the component is destroyed
+    // Remove click event when the component is destroyed
     document.removeEventListener("click", this.handleClickAway);
   },
-  
   methods: {
     handleClickAway(event) {
-      // Check if the clicked element is outside the dropdown container
+      // Checks if the clicked element is outside the dropdown container
       if (!this.$refs.dropdownContainer.contains(event.target)) {
-        // Handle the click outside logic here
+        // Handle the click outside logic 
         this.expand = false;
-        
       }
     },
   },
+
   computed: {
-    handleDataBdrop(expand) {
+    handleDataBdrop() {
+      //Receives expand Boolean from child Bdrop
       return (expand) => { 
         this.expand = expand;
       }
     }, 
-    handleDataLdrop(data) {
-      //Receives selected option from child Ldrop
+    handleDataLdrop() {
+      //Receives selected option String from child Ldrop
       return (data) => { 
         //Emits selected option to HTML
         this.$emit('selected-option', data.selectedOption);

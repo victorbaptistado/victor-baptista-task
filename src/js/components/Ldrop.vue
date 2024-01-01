@@ -10,7 +10,7 @@
         leave-to-class="-translate-y-1/2 scale-y-0 opacity-0"
       >
         <ul
-          v-show="isOptionsExpanded"
+          v-show="expand"
           class="absolute left-0 right-0 mb-4 bg-white rounded-sm shadow-lg overflow-hidden"
         >
           <li
@@ -33,7 +33,7 @@
     </div>
     <aside
       class="transform MD:hidden bg-white shadow-inner left-0 right-0 bottom-0 w-full fixed overflow-auto ease-in-out transition-all duration-300 z-30 py-4"
-      :class="isOptionsExpanded ? 'translate-y-0' : 'translate-y-full'"
+      :class="expand ? 'translate-y-0' : 'translate-y-full'"
     >
       <ul
         class="left-0 right-0 overflow-hidden"
@@ -62,107 +62,61 @@
       </ul>
     </aside>
   </div>
-  </div>
 </template>
 
+
+
 <script>
-//Import svgicon tag and icon
-import VueSVGIcon from 'vue-svgicon'
-Vue.use(VueSVGIcon)
-import "../icons/index"
+  //Import svgicon tag and icon
+  import VueSVGIcon from 'vue-svgicon'
+  Vue.use(VueSVGIcon)
+  import "../icons/index"
 
-export default {
-  data() {
-    return {
-    };
-  },
-  props: {
-    /*updatedOptions: {
-      type: Boolean
-    },
-    */
-    isOptionsExpanded: {
-      default: false,
-      type: Boolean,
-      required: true,
-    },
-    optionsArray: {
-      type: Array,
-    },
-    iconHide: {
-      type: Boolean,
-    },
-    iconHideList: {
-      type: Boolean,
-    }  
-  },
-  methods: {
-    //Handles the option selection
-    setOption(option) {
-      //Sends selected option to parent Bdrop
-      this.$emit('selected-option', {selectedOption: option });
-    },
-  }, 
-  watch: {
-    /*
-    isOptionsExpanded: function(data){
-      console.log('data', data)
-      return this.isOptionsExpanded;
-    },*/
-
-    
-  },
-  computed: {
-    expand: {
-      get: function () {
-          return this.isOptionsExpanded;
+  export default {
+    props: {
+      isOptionsExpanded: {
+        default: false,
+        type: Boolean,
+        required: true,
       },
-      set: function (isOptionsExpanded) {
-        return isOptionsExpanded;
-      }
-    },
-    error: {
-      get: function () {
-        if(this.optionsArray.length === 0){
-          return this.error = true;
-        } 
-        return this.error = false;
+      optionsArray: {
+        type: Array,
       },
-      set: function (optionsArray) {
-        return optionsArray;
-      }
-    }
-  },
-  handleClickAway() {
-      return () => { 
-        //closeClickAway = false;
-        this.expand = false;
-        return this.expand;
-      }
-    },  
-  /*
-  watch: {
-    isOptionsExpanded: {
-      immediate: true,
-      handler(isOptionsExpanded) {
-        if (process.client) {
-          if (isOptionsExpanded) document.body.style.setProperty("overflow", "hidden");
-          else document.body.style.removeProperty("overflow");
+      iconHide: {
+        type: Boolean,
+      },
+      iconHideList: {
+        type: Boolean,
+      }  
+    },
+    methods: {
+      //Handles the option selection
+      setOption(option) {
+        //Sends selected option to parent Bdrop
+        this.$emit('handleDataLdrop', {selectedOption: option });
+      },
+    }, 
+    computed: {
+      expand: {
+        get: function () {
+            return this.isOptionsExpanded;
+        },
+        set: function (isOptionsExpanded) {
+          return isOptionsExpanded;
+        }
+      },
+      error: {
+        get: function () {
+          if(this.optionsArray.length === 0){
+            return this.error = true;
+          } 
+          return this.error = false;
+        },
+        set: function (optionsArray) {
+          return optionsArray;
         }
       }
-    }
-  },
-  */
-};
+    },
+  };
 </script>
 
-<style>
-.error-state {
-  border: 2px solid red; /* Example: Apply a red border for the error state */
-}
-
-.error-message {
-  color: red;
-  font-size: 14px;
-}
-</style>

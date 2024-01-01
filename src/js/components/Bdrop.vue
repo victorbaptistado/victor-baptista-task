@@ -5,7 +5,6 @@
       :disabled="isDisabled"
       :class="[isDisabled ? 'bg-grey-100/[.12]' : 'bg-grey-100', error ? 'border-2 border-red-500/80' : '', iconHide ? 'w-32' : 'w-36']"
       @click="setExpanded()"
-      @blur="handleClickAway"
     >
       <svgicon v-if="!iconHide && !iconHideBtn" icon="filler" color="white" width="24" height="auto"></svgicon>
       <span><p class="text-white font-ceraproMedium">{{ selectedOption }}</p></span>
@@ -57,30 +56,9 @@ export default {
     setExpanded() {
       //Makes expand equals the coming props isOptionsExpanded 
       this.expand = !this.isOptionsExpanded;
-      this.$emit('options-expanded', this.expand);
+      this.$emit('handleDataBdrop', this.expand);
     },
   },
-  
-  computed: {
-    handleClickAway() {
-      return () => { 
-        this.expand = false;
-        //return this.expand;
-      }
-    },  
-    /*
-    closeClickAway: {
-      get: function () {
-        console.log('this.isOptionsExpanded',this.isOptionsExpanded);
-        return this.isOptionsExpanded;
-      },
-      set: function (isOptionsExpanded) {
-        return isOptionsExpanded;
-      }
-    }
-    */
-  },
-
 };
 
 </script>
