@@ -86,7 +86,7 @@
     methods: {
       //Handles the option selection
       setOption(option) {
-        //Sends selected option to parent Bdrop
+        //Sends selected option to parent Dropdown
         this.$emit('handleDataLdrop', {selectedOption: option });
       },
     }, 
@@ -99,18 +99,9 @@
           return isOptionsExpanded;
         }
       },
-      error: {
-        get: function () {
-          if(this.optionsArray.length === 0){
-            return this.error = true;
-          } 
-          return this.error = false;
-        },
-        set: function (optionsArray) {
-          return optionsArray;
-        }
-      }
+      
+     
+      
     },
   };
 </script>
-
